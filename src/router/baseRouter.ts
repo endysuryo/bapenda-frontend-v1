@@ -1,3 +1,4 @@
+import CustomerBillboard from '@/views/customerBillboard/CustomerBillboard.vue';
 import Login from '@/views/login/Login.vue';
 import Vue from 'vue';
 import Router from 'vue-router';
@@ -67,11 +68,20 @@ export const routes: any[] = [
     },
   },
   {
+    path: '/customer-billboard',
+    name: 'customer-billboard',
+    component: CustomerBillboard,
+    meta: {
+      title: 'Customer Billboard',
+      requiredAuth: true,
+    },
+  },
+  {
     path: '/kmeans',
     name: 'kmeans',
     component: Kmeans,
     meta: {
-      title: 'Kmeans',
+      title: 'Laporan',
       requiredAuth: true,
     },
   },

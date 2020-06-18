@@ -17,7 +17,12 @@ export default class BaseApp extends Vue {
   miniVariant: boolean = false;
   itemsAccount: any = [
     { icon: 'mdi-home', text: 'Dashboard', routeName: 'dashboard' },
-    { icon: 'mdi-chart-line', text: 'Kmeans', routeName: 'kmeans' },
+    { icon: 'mdi-chart-line', text: 'Laporan', routeName: 'kmeans' },
+    {
+      icon: 'mdi-chart-line',
+      text: 'Customer Billboard',
+      routeName: 'customer-billboard',
+    },
   ];
   itemsCourse: any = [
     { icon: 'mdi-account', text: 'Customer', routeName: 'customer' },
