@@ -6,6 +6,7 @@ import {
 } from '../interface/app.interface';
 import { IBillboardData } from '../interface/billboard.interface';
 import { ICustomerData } from '../interface/customer.interface';
+import { ICustomerBillboardData } from '../interface/customerBillboard.interface';
 import { ISubdistrictData } from '../interface/subdistrict.interface';
 
 export const initParams: IParams = {
@@ -51,4 +52,16 @@ export const initBillboardData: IBillboardData = {
 export const initSubdistrictData: ISubdistrictData = {
   name: '',
   weight: 0,
+};
+
+export const initCustomerBillboardData: ICustomerBillboardData = {
+  customer_id: '',
+  billing_id: '',
+  skpd_number: '',
+  billboard_id: '',
+  subdistrict_id: '',
+  billboard_weight: 0,
+  billboard_total: 0,
+  subdistrict_weight: 0,
+  user_id: '',
 };

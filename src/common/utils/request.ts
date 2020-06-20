@@ -41,3 +41,17 @@ requestSubdistrict.interceptors.request.use(
     Promise.reject(error);
   },
 );
+
+export const requestCustomerBillboard = axios.create({
+  baseURL: process.env.VUE_APP_API_BASE_URL_BAPENDA_SERVICE,
+  timeout: 10000,
+});
+
+requestCustomerBillboard.interceptors.request.use(
+  (config: any) => {
+    return config;
+  },
+  (error) => {
+    Promise.reject(error);
+  },
+);
