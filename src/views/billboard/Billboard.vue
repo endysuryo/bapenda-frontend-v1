@@ -3,37 +3,36 @@
     <HeaderPage />
     <v-progress-linear
       class="loading-indicator"
-      v-if="isLoadingFetchCustomer"
+      v-if="isLoadingFetchBillboard"
       color="success"
       indeterminate
       height="5"
     ></v-progress-linear>
-    <v-data-table :headers="headers" :items="customers" :search="search" class="elevation-1">
+    <v-data-table :headers="headers" :items="billboards" :search="search" class="elevation-1">
       <template v-slot:top>
         <v-toolbar flat color="white">
           <v-toolbar-title>
             <v-text-field
               v-model="search"
               append-icon="mdi-magnify"
-              label="Search Customer"
+              label="Search Billboard"
               single-line
               hide-details
             ></v-text-field>
           </v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn color="red lighten-1" dark class="mb-2" @click="showFormCreate">Create Customer</v-btn>
+          <v-btn color="red lighten-1" dark class="mb-2" @click="showFormCreate">Create Billboard</v-btn>
           <v-dialog v-model="dialog" max-width="500px">
             <v-card>
               <v-card-title>
-                <span class="headline">{{ isCreateTitle ? 'Create' : 'Edit' }} Customer</span>
+                <span class="headline">{{ isCreateTitle ? 'Create' : 'Edit' }} Billboard</span>
               </v-card-title>
 
               <v-card-text>
                 <v-container>
-                  <v-text-field v-model="editedItem.name" label="Nama"></v-text-field>
-                  <v-text-field v-model="editedItem.address" label="Alamat"></v-text-field>
-                  <v-text-field v-model="editedItem.phone" label="Telepon"></v-text-field>
-                  <v-text-field v-model="editedItem.npwp" label="NPWP"></v-text-field>
+                  <v-text-field v-model="editedItem.name" label="JenisReklame"></v-text-field>
+                  <v-text-field v-model="editedItem.weight" label="Bobot"></v-text-field>
+                  <v-text-field v-model="editedItem.price" label="Harga"></v-text-field>
                 </v-container>
               </v-card-text>
 

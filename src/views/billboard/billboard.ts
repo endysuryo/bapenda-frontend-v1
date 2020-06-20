@@ -1,11 +1,11 @@
-import { initCustomerData } from '@/common/utils/initialValue';
+import { initBillboardData } from '@/common/utils/initialValue';
 import { Hooper, Navigation, Slide } from 'hooper';
 import 'hooper/dist/hooper.css';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import { ICustomerData } from '../../common/interface/customer.interface';
+import { IBillboardData } from '../../common/interface/billboard.interface';
 import HeaderPage from '../../components/HeaderPage.vue';
-import { CustomerModule } from '../../store/modules/customer';
+import { BillboardModule } from '../../store/modules/billboard';
 
 @Component({
   name: 'Billboard',
@@ -21,7 +21,7 @@ export default class Billboard extends Vue {
   search: any = '';
   dialog: boolean = false;
   dialogReset: boolean = false;
-  customerData: ICustomerData = Object.assign({}, initCustomerData);
+  billboardData: IBillboardData = Object.assign({}, initBillboardData);
 
   itemWillBeDeleted: any = {};
   dialogConfirmDelete: boolean = false;
@@ -29,15 +29,13 @@ export default class Billboard extends Vue {
   editedIndex: any = -1;
   editedItem: any = {
     name: '',
-    password: '',
-    phone: '',
-    npwp: '',
+    weight: 0,
+    price: 0,
   };
   defaultItem: any = {
     name: '',
-    password: '',
-    phone: '',
-    npwp: '',
+    weight: 0,
+    price: 0,
   };
   hooperSettings: any = {
     itemsToShow: 4.14,
@@ -48,55 +46,49 @@ export default class Billboard extends Vue {
 
   headers: any = [
     {
-      text: 'Nama Depan',
+      text: 'Jenis Reklame',
       align: 'start',
       sortable: false,
       value: 'name',
     },
     {
-      text: 'Nama Belakang',
+      text: 'Bobot',
       align: 'start',
       sortable: false,
-      value: 'address',
+      value: 'weight',
     },
     {
-      text: 'Email',
+      text: 'Harga',
       align: 'start',
       sortable: false,
-      value: 'phone',
-    },
-    {
-      text: 'NPWP',
-      align: 'start',
-      sortable: false,
-      value: 'npwp',
+      value: 'price',
     },
     { text: 'Actions', value: 'actions', sortable: false },
   ];
 
-  mounted() {
-    this.getCustomerList();
+  created() {
+    this.getBillboardList();
   }
 
   get params() {
-    return CustomerModule.paramsCustomer;
+    return BillboardModule.paramsBillboard;
   }
 
-  get customers() {
-    console.info(CustomerModule.customers);
-    return CustomerModule.customers;
+  get billboards() {
+    console.info(BillboardModule.billboards);
+    return BillboardModule.billboards;
   }
 
-  get isLoadingFetchCustomer() {
-    return CustomerModule.isLoadingFetchCustomer;
+  get isLoadingFetchBillboard() {
+    return BillboardModule.isLoadingFetchBillboard;
   }
 
-  getCustomerList() {
-    CustomerModule.fetchCustomer(this.params);
+  getBillboardList() {
+    BillboardModule.fetchBillboard(this.params);
   }
 
   editItem(item: any) {
-    this.editedIndex = this.customers;
+    this.editedIndex = this.billboards;
     this.editedItem = Object.assign({}, item);
     this.isCreateTitle = false;
     this.dialog = true;
@@ -112,7 +104,7 @@ export default class Billboard extends Vue {
   }
 
   showFormCreate() {
-    this.customerData = Object.assign({}, initCustomerData);
+    this.billboardData = Object.assign({}, initBillboardData);
     this.dialog = true;
     this.isCreateTitle = true;
   }
@@ -128,7 +120,7 @@ export default class Billboard extends Vue {
   }
 
   deleteItem() {
-    CustomerModule.deleteOneCustomer(this.itemWillBeDeleted.id);
+    BillboardModule.deleteOneBillboard(this.itemWillBeDeleted.id);
   }
 
   save() {
@@ -136,7 +128,7 @@ export default class Billboard extends Vue {
       ...this.editedItem,
     };
     console.info('itemnya : ', dataAccount);
-    CustomerModule.createOneCustomer(dataAccount);
+    BillboardModule.createOneBillboard(dataAccount);
     this.dialog = false;
   }
 
@@ -145,7 +137,7 @@ export default class Billboard extends Vue {
     const dataAccount: any = {
       ...this.editedItem,
     };
-    CustomerModule.updateOneCustomer(dataAccount);
+    BillboardModule.updateOneBillboard(dataAccount);
     this.dialog = false;
   }
 }

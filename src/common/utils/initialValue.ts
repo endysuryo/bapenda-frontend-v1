@@ -4,7 +4,9 @@ import {
   IResult,
   ISuccessState,
 } from '../interface/app.interface';
+import { IBillboardData } from '../interface/billboard.interface';
 import { ICustomerData } from '../interface/customer.interface';
+import { ISubdistrictData } from '../interface/subdistrict.interface';
 
 export const initParams: IParams = {
   filters: [],
@@ -38,4 +40,15 @@ export const initCustomerData: ICustomerData = {
   address: '',
   npwp: '',
   phone: '',
+};
+
+export const initBillboardData: IBillboardData = {
+  name: '',
+  weight: 0,
+  price: 0,
+};
+
+export const initSubdistrictData: ISubdistrictData = {
+  name: '',
+  weight: 0,
 };

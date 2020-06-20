@@ -23,21 +23,21 @@
               </v-avatar>
               <div>
                 <div class="body-2">Total Wajib Pajak</div>
-                <div class="headline black--text">76 Wajib Pajak</div>
+                <div class="headline black--text">{{ customers.length }} Wajib Pajak</div>
               </div>
               <v-avatar dark width="50px" height="50px" color="red lighten-1" class="mr-4">
                 <v-icon color="white">mdi-arrow-up-drop-circle</v-icon>
               </v-avatar>
               <div>
                 <div class="body-2">Total Billboard</div>
-                <div class="headline black--text">89 Billboard</div>
+                <div class="headline black--text">{{ billboards.length }} Billboard</div>
               </div>
               <v-avatar dark width="50px" height="50px" color="red lighten-1" class="mr-4">
                 <v-icon color="white">mdi-arrow-up-drop-circle</v-icon>
               </v-avatar>
               <div>
                 <div class="body-2">Total Kecamatan</div>
-                <div class="headline black--text">16 Kecamatan</div>
+                <div class="headline black--text">{{ subdistricts.length }} Kecamatan</div>
               </div>
               <!-- </div> -->
             </div>

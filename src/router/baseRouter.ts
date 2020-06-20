@@ -117,7 +117,7 @@ export const routes: any[] = [
     name: 'subdistrict',
     component: Subdistrict,
     meta: {
-      title: 'Subdistrict',
+      title: 'Data Kecamatan',
       requiredAuth: true,
     },
   },

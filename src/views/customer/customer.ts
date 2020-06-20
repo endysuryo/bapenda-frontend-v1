@@ -74,7 +74,7 @@ export default class Customer extends Vue {
     { text: 'Actions', value: 'actions', sortable: false },
   ];
 
-  mounted() {
+  created() {
     this.getCustomerList();
   }
 

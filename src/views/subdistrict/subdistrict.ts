@@ -1,11 +1,11 @@
-import { initCustomerData } from '@/common/utils/initialValue';
+import { initSubdistrictData } from '@/common/utils/initialValue';
 import { Hooper, Navigation, Slide } from 'hooper';
 import 'hooper/dist/hooper.css';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import { ICustomerData } from '../../common/interface/customer.interface';
+import { ISubdistrictData } from '../../common/interface/subdistrict.interface';
 import HeaderPage from '../../components/HeaderPage.vue';
-import { CustomerModule } from '../../store/modules/customer';
+import { SubdistrictModule } from '../../store/modules/subdistrict';
 
 @Component({
   name: 'Subdistrict',
@@ -21,7 +21,7 @@ export default class Subdistrict extends Vue {
   search: any = '';
   dialog: boolean = false;
   dialogReset: boolean = false;
-  customerData: ICustomerData = Object.assign({}, initCustomerData);
+  subdistrictData: ISubdistrictData = Object.assign({}, initSubdistrictData);
 
   itemWillBeDeleted: any = {};
   dialogConfirmDelete: boolean = false;
@@ -29,15 +29,11 @@ export default class Subdistrict extends Vue {
   editedIndex: any = -1;
   editedItem: any = {
     name: '',
-    password: '',
-    phone: '',
-    npwp: '',
+    weight: '',
   };
   defaultItem: any = {
     name: '',
-    password: '',
-    phone: '',
-    npwp: '',
+    weight: '',
   };
   hooperSettings: any = {
     itemsToShow: 4.14,
@@ -48,55 +44,43 @@ export default class Subdistrict extends Vue {
 
   headers: any = [
     {
-      text: 'Nama Depan',
+      text: 'Nama Kecamatan',
       align: 'start',
       sortable: false,
       value: 'name',
     },
     {
-      text: 'Nama Belakang',
+      text: 'Bobot',
       align: 'start',
       sortable: false,
-      value: 'address',
-    },
-    {
-      text: 'Email',
-      align: 'start',
-      sortable: false,
-      value: 'phone',
-    },
-    {
-      text: 'NPWP',
-      align: 'start',
-      sortable: false,
-      value: 'npwp',
+      value: 'weight',
     },
     { text: 'Actions', value: 'actions', sortable: false },
   ];
 
   mounted() {
-    this.getCustomerList();
+    this.getSubdistrictList();
   }
 
   get params() {
-    return CustomerModule.paramsCustomer;
+    return SubdistrictModule.paramsSubdistrict;
   }
 
-  get customers() {
-    console.info(CustomerModule.customers);
-    return CustomerModule.customers;
+  get subdistricts() {
+    console.info(SubdistrictModule.subdistricts);
+    return SubdistrictModule.subdistricts;
   }
 
-  get isLoadingFetchCustomer() {
-    return CustomerModule.isLoadingFetchCustomer;
+  get isLoadingFetchSubdistrict() {
+    return SubdistrictModule.isLoadingFetchSubdistrict;
   }
 
-  getCustomerList() {
-    CustomerModule.fetchCustomer(this.params);
+  getSubdistrictList() {
+    SubdistrictModule.fetchSubdistrict(this.params);
   }
 
   editItem(item: any) {
-    this.editedIndex = this.customers;
+    this.editedIndex = this.subdistricts;
     this.editedItem = Object.assign({}, item);
     this.isCreateTitle = false;
     this.dialog = true;
@@ -112,7 +96,7 @@ export default class Subdistrict extends Vue {
   }
 
   showFormCreate() {
-    this.customerData = Object.assign({}, initCustomerData);
+    this.subdistrictData = Object.assign({}, initSubdistrictData);
     this.dialog = true;
     this.isCreateTitle = true;
   }
@@ -128,7 +112,7 @@ export default class Subdistrict extends Vue {
   }
 
   deleteItem() {
-    CustomerModule.deleteOneCustomer(this.itemWillBeDeleted.id);
+    SubdistrictModule.deleteOneSubdistrict(this.itemWillBeDeleted.id);
   }
 
   save() {
@@ -136,7 +120,7 @@ export default class Subdistrict extends Vue {
       ...this.editedItem,
     };
     console.info('itemnya : ', dataAccount);
-    CustomerModule.createOneCustomer(dataAccount);
+    SubdistrictModule.createOneSubdistrict(dataAccount);
     this.dialog = false;
   }
 
@@ -145,7 +129,7 @@ export default class Subdistrict extends Vue {
     const dataAccount: any = {
       ...this.editedItem,
     };
-    CustomerModule.updateOneCustomer(dataAccount);
+    SubdistrictModule.updateOneSubdistrict(dataAccount);
     this.dialog = false;
   }
 }
