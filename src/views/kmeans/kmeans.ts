@@ -1,3 +1,4 @@
+import { CustomerBillboardModule } from '@/store/modules/customerBillboard';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import HeaderPage from '../../components/HeaderPage.vue';
@@ -9,105 +10,85 @@ import HeaderPage from '../../components/HeaderPage.vue';
   },
 })
 export default class Kmeans extends Vue {
-  date: string = new Date().toISOString().substr(0, 10);
-  menu: boolean = false;
+  dialog: boolean = false;
+  start_date: string = new Date().toISOString().substr(0, 10);
+  end_date: string = new Date().toISOString().substr(0, 10);
+  menu1: boolean = false;
   modal: boolean = false;
   menu2: boolean = false;
-  singleSelect: boolean = false;
   selected: any = [];
   headers: any = [
     {
-      text: 'Dessert (100g serving)',
+      text: 'Billing ID',
       align: 'start',
       sortable: false,
-      value: 'name',
+      value: 'billing_id',
     },
-    { text: 'Calories', value: 'calories' },
-    { text: 'Fat (g)', value: 'fat' },
-    { text: 'Carbs (g)', value: 'carbs' },
-    { text: 'Protein (g)', value: 'protein' },
-    { text: 'Iron (%)', value: 'iron' },
+    { text: 'SKPD', value: 'skpd_number' },
+    { text: 'Customer', value: 'customer.name' },
+    { text: 'Jenis Billboard', value: 'billboard.name' },
+    { text: 'Lokasi Kecamatan', value: 'subdistrict.name' },
+    { text: 'Bobot Billboard', value: 'billboard_weight' },
+    { text: 'Total Billboard', value: 'billboard_total' },
+    { text: 'Bobot Kecamatan', value: 'subdistrict_weight' },
   ];
-  desserts: any = [
+
+  kmeans_headers: any = [
     {
-      name: 'Frozen Yogurt',
-      calories: 159,
-      fat: 6.0,
-      carbs: 24,
-      protein: 4.0,
-      iron: '1%',
+      text: 'Billing ID',
+      align: 'start',
+      sortable: false,
+      value: 'billing_id',
     },
-    {
-      name: 'Ice cream sandwich',
-      calories: 237,
-      fat: 9.0,
-      carbs: 37,
-      protein: 4.3,
-      iron: '1%',
-    },
-    {
-      name: 'Eclair',
-      calories: 262,
-      fat: 16.0,
-      carbs: 23,
-      protein: 6.0,
-      iron: '7%',
-    },
-    {
-      name: 'Cupcake',
-      calories: 305,
-      fat: 3.7,
-      carbs: 67,
-      protein: 4.3,
-      iron: '8%',
-    },
-    {
-      name: 'Gingerbread',
-      calories: 356,
-      fat: 16.0,
-      carbs: 49,
-      protein: 3.9,
-      iron: '16%',
-    },
-    {
-      name: 'Jelly bean',
-      calories: 375,
-      fat: 0.0,
-      carbs: 94,
-      protein: 0.0,
-      iron: '0%',
-    },
-    {
-      name: 'Lollipop',
-      calories: 392,
-      fat: 0.2,
-      carbs: 98,
-      protein: 0,
-      iron: '2%',
-    },
-    {
-      name: 'Honeycomb',
-      calories: 408,
-      fat: 3.2,
-      carbs: 87,
-      protein: 6.5,
-      iron: '45%',
-    },
-    {
-      name: 'Donut',
-      calories: 452,
-      fat: 25.0,
-      carbs: 51,
-      protein: 4.9,
-      iron: '22%',
-    },
-    {
-      name: 'KitKat',
-      calories: 518,
-      fat: 26.0,
-      carbs: 65,
-      protein: 7,
-      iron: '6%',
-    },
+    { text: 'SKPD', value: 'skpd_number' },
+    { text: 'Customer', value: 'customer.name' },
+    { text: 'Jenis Billboard', value: 'billboard.name' },
+    { text: 'Lokasi Kecamatan', value: 'subdistrict.name' },
+    { text: 'Bobot Billboard', value: 'billboard_weight' },
+    { text: 'Total Billboard', value: 'billboard_total' },
+    { text: 'Bobot Kecamatan', value: 'subdistrict_weight' },
+    { text: 'Data Klaster 1', value: 'data_cluster1' },
+    { text: 'Data Klaster 2', value: 'data_cluster2' },
+    { text: 'Data Klaster 3', value: 'data_cluster3' },
+    { text: 'Klaster Minimum', value: 'minimum_cluster' },
   ];
+
+  get isLoadingFetchCustomerBillboard() {
+    return CustomerBillboardModule.isLoadingFetchCustomerBillboard;
+  }
+
+  get customerBillboardByDates() {
+    return CustomerBillboardModule.customerBillboardByDates;
+  }
+
+  get kmeans() {
+    return CustomerBillboardModule.kmeans;
+  }
+
+  async getCustomerBillboard() {
+    const params: any = {
+      start_date: this.start_date,
+      end_date: this.end_date,
+    };
+
+    CustomerBillboardModule.fetchCustomerBillboardByDate(params);
+  }
+
+  async generateKmeans() {
+    console.info('selected: ', this.selected);
+    if (this.selected.length === 3) {
+      const payload = {
+        start_date: this.start_date,
+        end_date: this.end_date,
+        cluster_1: this.selected[0],
+        cluster_2: this.selected[1],
+        cluster_3: this.selected[2],
+      };
+      console.info('payload: ', payload);
+      CustomerBillboardModule.generateKmeans(payload);
+      this.dialog = true;
+    } else {
+      console.info('tidak mantap');
+    }
+  }
 }

@@ -1,9 +1,26 @@
-import { ICustomerBillboardData } from '../interface/customerBillboard.interface';
+import {
+  ICustomerBillboardData,
+  IParamCustomerBillboard,
+} from '../interface/customerBillboard.interface';
 import { requestCustomerBillboard } from '../utils/request';
+
+export const generateKmeans = (data: any) =>
+  requestCustomerBillboard({
+    url: `/customerBillboards/kmeans/generate`,
+    method: 'post',
+    data,
+  });
 
 export const fetchCustomerBillboard = (queryString: string) =>
   requestCustomerBillboard({
     url: `/customerBillboards${queryString ? '?' + queryString : ''}`,
+    method: 'get',
+  });
+
+export const fetchCustomerBillboardByDate = (data: IParamCustomerBillboard) =>
+  requestCustomerBillboard({
+    url:
+      '/customerBillboards/start/' + data.start_date + '/end/' + data.end_date,
     method: 'get',
   });
 

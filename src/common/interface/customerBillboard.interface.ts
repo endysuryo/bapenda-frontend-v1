@@ -25,3 +25,8 @@ export interface ICustomerBillboardData {
   subdistrict_weight: number;
   user_id: string;
 }
+
+export interface IParamCustomerBillboard {
+  start_date: string;
+  end_date: string;
+}

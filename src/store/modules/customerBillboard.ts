@@ -18,11 +18,14 @@ import {
   createOneCustomerBillboard,
   deleteOneCustomerBillboard,
   fetchCustomerBillboard,
+  fetchCustomerBillboardByDate,
+  generateKmeans,
   updateOneCustomerBillboard,
 } from '../../common/api/customerBillboard';
 import {
   ICustomerBillboardData,
   ICustomerBillboardStore,
+  IParamCustomerBillboard,
 } from '../../common/interface/customerBillboard.interface';
 import {
   initErrorState,
@@ -38,12 +41,37 @@ class CustomerBillboard extends VuexModule implements ICustomerBillboardStore {
   isLoadingUpdateCustomerBillboard = false;
   isLoadingDeleteCustomerBillboard = false;
   customerBillboards = initResult;
+  customerBillboardByDates = [];
+  kmeans = [];
   paramsCustomerBillboard = { ...initParams };
   isCustomerBillboardError = false;
   customerBillboardErrorState = initErrorState;
   isCustomerBillboardSuccess = false;
   customerBillboardSuccessState = initSuccessState;
   isSnackBarSaveCustomerBillboard = false;
+
+  @Action
+  async generateKmeans(data: any) {
+    try {
+      this.CLEAN_ACTION();
+      this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(true);
+      const res: any = await generateKmeans(data);
+
+      if (res && res.data) {
+        this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(false);
+        console.info('hasil kmeans: ', res.data);
+        this.SET_KMEANS(res.data);
+      } else {
+        this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(false);
+        this.SET_CUSTOMER_BILLBOARDS(initResult);
+      }
+    } catch (error) {
+      this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(false);
+      this.SET_CUSTOMER_BILLBOARDS(initResult);
+      this.SET_INDICATOR_ERROR_CUSTOMER_BILLBOARD(true);
+      this.SET_ERROR_CUSTOMER_BILLBOARD(formatErrorMessage(error));
+    }
+  }
 
   @Action
   async fetchCustomerBillboard(params: IParams) {
@@ -59,6 +87,30 @@ class CustomerBillboard extends VuexModule implements ICustomerBillboardStore {
         console.info('customerBillboard res.data', res.data);
 
         this.SET_CUSTOMER_BILLBOARDS(res.data);
+      } else {
+        this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(false);
+        this.SET_CUSTOMER_BILLBOARDS(initResult);
+      }
+    } catch (error) {
+      this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(false);
+      this.SET_CUSTOMER_BILLBOARDS(initResult);
+      this.SET_INDICATOR_ERROR_CUSTOMER_BILLBOARD(true);
+      this.SET_ERROR_CUSTOMER_BILLBOARD(formatErrorMessage(error));
+    }
+  }
+
+  @Action
+  async fetchCustomerBillboardByDate(params: IParamCustomerBillboard) {
+    try {
+      this.CLEAN_ACTION();
+      this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(true);
+      const res: any = await fetchCustomerBillboardByDate(params);
+
+      if (res && res.data) {
+        this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(false);
+        console.info('customerBillboardByDate res.data', res.data);
+
+        this.SET_CUSTOMER_BILLBOARD_BY_DATES(res.data);
       } else {
         this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(false);
         this.SET_CUSTOMER_BILLBOARDS(initResult);
@@ -134,6 +186,16 @@ class CustomerBillboard extends VuexModule implements ICustomerBillboardStore {
   @Mutation
   SET_CUSTOMER_BILLBOARDS(payload: IResult) {
     this.customerBillboards = payload;
+  }
+
+  @Mutation
+  SET_CUSTOMER_BILLBOARD_BY_DATES(payload: any) {
+    this.customerBillboardByDates = payload;
+  }
+
+  @Mutation
+  SET_KMEANS(payload: any) {
+    this.kmeans = payload;
   }
 
   @Mutation
