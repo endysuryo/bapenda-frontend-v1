@@ -11,6 +11,7 @@ export interface ICustomerBillboardStore {
   customerBillboardErrorState: IErrorState;
   isCustomerBillboardSuccess: boolean;
   customerBillboardSuccessState: ISuccessState;
+  isSnackBarSaveCustomerBillboard: boolean;
 }
 
 export interface ICustomerBillboardData {

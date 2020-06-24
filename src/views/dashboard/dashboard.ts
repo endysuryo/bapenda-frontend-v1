@@ -1,5 +1,6 @@
 import { BillboardModule } from '@/store/modules/billboard';
 import { CustomerModule } from '@/store/modules/customer';
+import { CustomerBillboardModule } from '@/store/modules/customerBillboard';
 import { SubdistrictModule } from '@/store/modules/subdistrict';
 import { Hooper, Navigation, Slide } from 'hooper';
 import 'hooper/dist/hooper.css';
@@ -36,6 +37,10 @@ export default class Dashboard extends Vue {
     return SubdistrictModule.paramsSubdistrict;
   }
 
+  get paramsCustomerBillboard() {
+    return CustomerBillboardModule.paramsCustomerBillboard;
+  }
+
   get customers() {
     return CustomerModule.customers;
   }
@@ -48,10 +53,15 @@ export default class Dashboard extends Vue {
     return SubdistrictModule.subdistricts;
   }
 
+  get customerBillboards() {
+    return CustomerBillboardModule.customerBillboards;
+  }
+
   created() {
     this.getCustomerList();
     this.getBillboardList();
     this.getSubdistrictList();
+    this.getCustomerBillboard();
   }
 
   mounted() {
@@ -68,5 +78,11 @@ export default class Dashboard extends Vue {
 
   getSubdistrictList() {
     SubdistrictModule.fetchSubdistrict(this.paramsSubdistrict);
+  }
+
+  getCustomerBillboard() {
+    CustomerBillboardModule.fetchCustomerBillboard(
+      this.paramsCustomerBillboard,
+    );
   }
 }

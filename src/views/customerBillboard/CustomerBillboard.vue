@@ -1,16 +1,16 @@
 <template>
   <div>
     <HeaderPage />
-    <v-snackbar v-model="snackbar" color="alert" top>
-      Username atau password salah
-      <template v-slot:action="{ attrs }">
-        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
-      </template>
-    </v-snackbar>
+    <v-snackbar
+      color="success"
+      top
+      v-model="isSnackBarSaveCustomerBillboard"
+    >Success Create Customer Billboard</v-snackbar>
     <v-card class="mx-auto">
       <!-- <v-card-subtitle class="pb-0">Login</v-card-subtitle> -->
 
       <v-card-text class="text--primary">
+        {{ isSnackBarSaveCustomerBillboard }}
         <v-text-field v-model="customerBillboard.billing_id" label="ID Billing" required></v-text-field>
         <v-text-field v-model="customerBillboard.skpd_number" label="Nomor SKPD" required></v-text-field>
         <v-select
@@ -19,6 +19,7 @@
           item-value="id"
           item-text="name"
           v-model="customerBillboard.billboard_id"
+          @change="onChangeBillboard()"
         ></v-select>
         <v-select
           :items="subdistricts"
@@ -26,8 +27,14 @@
           item-value="id"
           item-text="name"
           v-model="customerBillboard.subdistrict_id"
+          @change="onChangeSubdistrict()"
         ></v-select>
-        <v-text-field v-model="customerBillboard.billboard_weight" label="Bobot Billboard" required></v-text-field>
+        <v-text-field
+          v-model="customerBillboard.billboard_weight"
+          label="Bobot Billboard"
+          required
+          readonly
+        ></v-text-field>
         <v-text-field v-model="customerBillboard.billboard_total" label="Total Billboard" required></v-text-field>
         <v-text-field
           v-model="customerBillboard.subdistrict_weight"
@@ -38,7 +45,13 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="red lighten-1" block dark @click="login">Login</v-btn>
+        <v-btn
+          color="red lighten-1"
+          block
+          dark
+          :loading="isLoadingCreateCustomerBillboard"
+          @click="saveData"
+        >Save</v-btn>
       </v-card-actions>
     </v-card>
   </div>

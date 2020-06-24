@@ -15,8 +15,8 @@
                 <v-icon color="white">mdi-arrow-up-drop-circle</v-icon>
               </v-avatar>
               <div>
-                <div class="body-2">Total Reklame Wajib Pajak</div>
-                <div class="headline black--text">120 Reklame</div>
+                <div class="body-2">Total Reklame</div>
+                <div class="headline black--text">{{ customerBillboards.length }} Reklame</div>
               </div>
               <v-avatar dark width="50px" height="50px" color="red lighten-1" class="mr-4">
                 <v-icon color="white">mdi-arrow-up-drop-circle</v-icon>

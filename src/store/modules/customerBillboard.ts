@@ -43,11 +43,13 @@ class CustomerBillboard extends VuexModule implements ICustomerBillboardStore {
   customerBillboardErrorState = initErrorState;
   isCustomerBillboardSuccess = false;
   customerBillboardSuccessState = initSuccessState;
+  isSnackBarSaveCustomerBillboard = false;
 
   @Action
   async fetchCustomerBillboard(params: IParams) {
     try {
       this.CLEAN_ACTION();
+      this.SET_SNACKBAR_SAVE_CUSTOMER_BILLBOARD(false);
       this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(true);
       const queryString = await generateQueryString(params);
       const res: any = await fetchCustomerBillboard(queryString);
@@ -74,10 +76,12 @@ class CustomerBillboard extends VuexModule implements ICustomerBillboardStore {
     try {
       this.CLEAN_ACTION();
       this.SET_LOADING_CREATE_CUSTOMER_BILLBOARD(true);
+      this.SET_SNACKBAR_SAVE_CUSTOMER_BILLBOARD(false);
       const res: any = await createOneCustomerBillboard(data);
       if (res && res.data) {
         this.SET_LOADING_CREATE_CUSTOMER_BILLBOARD(false);
         this.fetchCustomerBillboard(initParams);
+        this.SET_SNACKBAR_SAVE_CUSTOMER_BILLBOARD(true);
       } else {
         this.SET_LOADING_CREATE_CUSTOMER_BILLBOARD(false);
       }
@@ -158,6 +162,11 @@ class CustomerBillboard extends VuexModule implements ICustomerBillboardStore {
   @Mutation
   SET_LOADING_DELETE_CUSTOMER_BILLBOARD(payload: boolean) {
     this.isLoadingDeleteCustomerBillboard = payload;
+  }
+
+  @Mutation
+  SET_SNACKBAR_SAVE_CUSTOMER_BILLBOARD(payload: boolean) {
+    this.isSnackBarSaveCustomerBillboard = payload;
   }
 
   @Mutation
