@@ -1,5 +1,22 @@
 <template>
   <div>
+    <v-snackbar
+      top
+      v-model="snackbar"
+      color="red"
+    >Centorid yang dipilih kurang atau lebih dari 3, siliahkan ulangi.</v-snackbar>
+    <v-dialog v-model="centroid_dialog">
+      <v-card>
+        <v-card-title class="headline">Centroid Summary :</v-card-title>
+        <v-card-text>
+          <v-data-table :headers="centroid_headers" :items="selected" class="elevation-1"></v-data-table>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="red lighten-1" text @click="generateKmeans">Proses</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <HeaderPage />
     <h1>Laporan</h1>
     <v-row>
@@ -72,11 +89,12 @@
       dark
       class="mt-5"
       :loading="isLoadingFetchCustomerBillboard"
-      @click="generateKmeans"
+      @click="checkCentroid"
     >Generate K-Means</v-btn>
     <v-row justify="center">
       <v-dialog v-model="dialog">
         <v-card>
+          <v-card-title>Hasil Perhitungan K-Means</v-card-title>
           <v-progress-linear
             indeterminate
             color="yellow darken-2"
