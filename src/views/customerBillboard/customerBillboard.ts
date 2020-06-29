@@ -16,7 +16,17 @@ import HeaderPage from '../../components/HeaderPage.vue';
   },
 })
 export default class CustomerBillboard extends Vue {
-  customerBillboard: ICustomerBillboardData = initCustomerBillboardData;
+  customerBillboard: any = {
+    customer_id: '',
+    billing_id: '',
+    skpd_number: '',
+    billboard_id: '',
+    subdistrict_id: '',
+    billboard_weight: 0,
+    billboard_total: 0,
+    subdistrict_weight: 0,
+    user_id: '',
+  };
   tempBillboard: any = this.billboards;
   tempSubdistrict: any = this.subdistricts;
   snackbar: boolean = true;
@@ -92,7 +102,6 @@ export default class CustomerBillboard extends Vue {
     this.customerBillboard = {
       ...this.customerBillboard,
       user_id: 'd162781c-e965-4ff3-9798-421d4080ea74',
-      customer_id: '7eac5123-828b-46e8-8603-22968cab6a68',
     };
     CustomerBillboardModule.createOneCustomerBillboard(this.customerBillboard);
     this.customerBillboard = {

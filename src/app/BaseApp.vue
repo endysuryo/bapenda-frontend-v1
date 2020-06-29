@@ -12,7 +12,9 @@
       <v-list>
         <v-list-item two-line :class="miniVariant && 'px-0'" class="my-5">
           <v-list-item-content class="px-3">
-            <img src="./../assets/images/bapenda-logo.png" />
+            <!-- <img src="./../assets/images/bapenda-logo.png" /> -->
+            <h2>E-Potensi</h2>
+            <h5>Bapenda Kota Semarang</h5>
           </v-list-item-content>
         </v-list-item>
 

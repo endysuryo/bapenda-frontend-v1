@@ -126,7 +126,7 @@ export const routes: any[] = [
     path: '/account',
     name: 'account',
     component: Account,
-    meta: new RouteMeta({ title: 'Author Account' }),
+    meta: new RouteMeta({ title: 'Account' }),
   },
 ];
 

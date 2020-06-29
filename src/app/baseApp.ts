@@ -19,7 +19,7 @@ export default class BaseApp extends Vue {
     { icon: 'mdi-home', text: 'Dashboard', routeName: 'dashboard' },
     { icon: 'mdi-chart-line', text: 'Laporan', routeName: 'kmeans' },
     {
-      icon: 'mdi-file-document',
+      icon: 'mdi-bulletin-board',
       text: 'Customer Billboard',
       routeName: 'customer-billboard',
     },

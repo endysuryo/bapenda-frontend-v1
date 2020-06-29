@@ -33,7 +33,7 @@
                   <v-text-field v-model="editedItem.name" label="Nama"></v-text-field>
                   <v-text-field v-model="editedItem.address" label="Alamat"></v-text-field>
                   <v-text-field v-model="editedItem.phone" label="Telepon"></v-text-field>
-                  <v-text-field v-model="editedItem.npwp" label="NPWP"></v-text-field>
+                  <v-text-field v-model="editedItem.npwp" label="NPWPD"></v-text-field>
                 </v-container>
               </v-card-text>
 

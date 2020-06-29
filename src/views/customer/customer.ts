@@ -66,7 +66,7 @@ export default class Customer extends Vue {
       value: 'phone',
     },
     {
-      text: 'NPWP',
+      text: 'NPWPD',
       align: 'start',
       sortable: false,
       value: 'npwp',

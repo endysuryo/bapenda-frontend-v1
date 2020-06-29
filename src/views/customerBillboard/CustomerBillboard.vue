@@ -14,6 +14,13 @@
         <v-text-field v-model="customerBillboard.billing_id" label="ID Billing" required></v-text-field>
         <v-text-field v-model="customerBillboard.skpd_number" label="Nomor SKPD" required></v-text-field>
         <v-select
+          :items="customers"
+          label="Customer"
+          item-value="id"
+          item-text="name"
+          v-model="customerBillboard.customer_id"
+        ></v-select>
+        <v-select
           :items="billboards"
           label="Jenis Billboard"
           item-value="id"
