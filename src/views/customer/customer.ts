@@ -60,7 +60,7 @@ export default class Customer extends Vue {
       value: 'address',
     },
     {
-      text: 'Email',
+      text: 'Telepon',
       align: 'start',
       sortable: true,
       value: 'phone',
