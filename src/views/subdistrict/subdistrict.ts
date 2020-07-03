@@ -46,13 +46,13 @@ export default class Subdistrict extends Vue {
     {
       text: 'Nama Kecamatan',
       align: 'start',
-      sortable: false,
+      sortable: true,
       value: 'name',
     },
     {
       text: 'Bobot',
       align: 'start',
-      sortable: false,
+      sortable: true,
       value: 'weight',
     },
     { text: 'Actions', value: 'actions', sortable: false },

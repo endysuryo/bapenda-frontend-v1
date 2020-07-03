@@ -10,7 +10,6 @@
       <!-- <v-card-subtitle class="pb-0">Login</v-card-subtitle> -->
 
       <v-card-text class="text--primary">
-        {{ isSnackBarSaveCustomerBillboard }}
         <v-text-field v-model="customerBillboard.billing_id" label="ID Billing" required></v-text-field>
         <v-text-field v-model="customerBillboard.skpd_number" label="Nomor SKPD" required></v-text-field>
         <v-select

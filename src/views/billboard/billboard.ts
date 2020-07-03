@@ -48,19 +48,19 @@ export default class Billboard extends Vue {
     {
       text: 'Jenis Reklame',
       align: 'start',
-      sortable: false,
+      sortable: true,
       value: 'name',
     },
     {
       text: 'Bobot',
       align: 'start',
-      sortable: false,
+      sortable: true,
       value: 'weight',
     },
     {
       text: 'Harga',
       align: 'start',
-      sortable: false,
+      sortable: true,
       value: 'price',
     },
     { text: 'Actions', value: 'actions', sortable: false },
