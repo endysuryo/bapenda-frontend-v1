@@ -121,7 +121,7 @@ export default class Subdistrict extends Vue {
     };
     console.info('itemnya : ', dataAccount);
     SubdistrictModule.createOneSubdistrict(dataAccount);
-    this.dialog = false;
+    this.close();
   }
 
   update() {
@@ -130,6 +130,6 @@ export default class Subdistrict extends Vue {
       ...this.editedItem,
     };
     SubdistrictModule.updateOneSubdistrict(dataAccount);
-    this.dialog = false;
+    this.close();
   }
 }

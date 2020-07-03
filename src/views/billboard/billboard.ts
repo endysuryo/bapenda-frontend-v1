@@ -129,7 +129,7 @@ export default class Billboard extends Vue {
     };
     console.info('itemnya : ', dataAccount);
     BillboardModule.createOneBillboard(dataAccount);
-    this.dialog = false;
+    this.close();
   }
 
   update() {
@@ -138,6 +138,6 @@ export default class Billboard extends Vue {
       ...this.editedItem,
     };
     BillboardModule.updateOneBillboard(dataAccount);
-    this.dialog = false;
+    this.close();
   }
 }

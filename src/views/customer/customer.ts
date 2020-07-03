@@ -137,7 +137,7 @@ export default class Customer extends Vue {
     };
     console.info('itemnya : ', dataAccount);
     CustomerModule.createOneCustomer(dataAccount);
-    this.dialog = false;
+    this.close();
   }
 
   update() {
@@ -146,6 +146,6 @@ export default class Customer extends Vue {
       ...this.editedItem,
     };
     CustomerModule.updateOneCustomer(dataAccount);
-    this.dialog = false;
+    this.close();
   }
 }
