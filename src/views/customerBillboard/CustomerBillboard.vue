@@ -12,29 +12,36 @@
       <v-card-text class="text--primary">
         <v-text-field v-model="customerBillboard.billing_id" label="ID Billing" required></v-text-field>
         <v-text-field v-model="customerBillboard.skpd_number" label="Nomor SKPD" required></v-text-field>
-        <v-select
+        <!-- <v-select
           :items="customers"
           label="Customer"
           item-value="id"
           item-text="name"
           v-model="customerBillboard.customer_id"
-        ></v-select>
-        <v-select
+        ></v-select>-->
+        <v-autocomplete
+          :items="customers"
+          label="Customer"
+          item-value="id"
+          item-text="name"
+          v-model="customerBillboard.customer_id"
+        ></v-autocomplete>
+        <v-autocomplete
           :items="billboards"
           label="Jenis Billboard"
           item-value="id"
           item-text="name"
           v-model="customerBillboard.billboard_id"
           @change="onChangeBillboard()"
-        ></v-select>
-        <v-select
+        ></v-autocomplete>
+        <v-autocomplete
           :items="subdistricts"
           label="Lokasi Kecamatan"
           item-value="id"
           item-text="name"
           v-model="customerBillboard.subdistrict_id"
           @change="onChangeSubdistrict()"
-        ></v-select>
+        ></v-autocomplete>
         <v-text-field
           v-model="customerBillboard.billboard_weight"
           label="Bobot Billboard"

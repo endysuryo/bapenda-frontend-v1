@@ -1,8 +1,11 @@
 import { initCustomerBillboardData } from '@/common/utils/initialValue';
+import { BillboardModule } from '@/store/modules/billboard';
+import { CustomerModule } from '@/store/modules/customer';
+import { SubdistrictModule } from '@/store/modules/subdistrict';
 import { Hooper, Navigation, Slide } from 'hooper';
 import 'hooper/dist/hooper.css';
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Watch } from 'vue-property-decorator';
 import { ICustomerBillboardData } from '../../common/interface/customerBillboard.interface';
 import HeaderPage from '../../components/HeaderPage.vue';
 import { CustomerBillboardModule } from '../../store/modules/customerBillboard';
@@ -75,10 +78,10 @@ export default class CustomerBillboard extends Vue {
       value: 'billboard.name',
     },
     {
-      text: 'Bobot Billboard',
+      text: 'Bobot Kecamatan',
       align: 'start',
       sortable: true,
-      value: 'billboard_weight',
+      value: 'subdistrict_weight',
     },
     {
       text: 'Total Billboard',
@@ -87,16 +90,86 @@ export default class CustomerBillboard extends Vue {
       value: 'billboard_total',
     },
     {
-      text: 'Bobot Kecamatan',
+      text: 'Bobot Billboard',
       align: 'start',
       sortable: true,
-      value: 'subdistrict_weight',
+      value: 'billboard_weight',
     },
     { text: 'Actions', value: 'actions', sortable: false },
   ];
 
+  customerBillboard: any = {
+    customer_id: '',
+    billing_id: '',
+    skpd_number: '',
+    billboard_id: '',
+    subdistrict_id: '',
+    billboard_weight: 0,
+    billboard_total: 0,
+    subdistrict_weight: 0,
+    user_id: '',
+  };
+  tempCustomerBillboard: any = {
+    id: '',
+    customer_id: '',
+    billing_id: '',
+    skpd_number: '',
+    billboard_id: '',
+    subdistrict_id: '',
+    billboard_weight: 0,
+    billboard_total: 0,
+    subdistrict_weight: 0,
+    user_id: '',
+  };
+  tempBillboard: any = this.billboards;
+  tempSubdistrict: any = this.subdistricts;
+  snackbar: boolean = true;
+
+  @Watch('tempCustomerBillboard.billboard_id')
+  onChangeBillboard(data: any) {
+    const billboardWeight = this.tempBillboard.find((el: any) => {
+      return el.id === data;
+    });
+    this.tempCustomerBillboard.billboard_weight = billboardWeight.weight;
+  }
+
+  @Watch('tempCustomerBillboard.subdistrict_id')
+  onChangeSubdistrict(data: any) {
+    const subdistrictWeight = this.tempSubdistrict.find((el: any) => {
+      return el.id === data;
+    });
+    this.tempCustomerBillboard.subdistrict_weight = subdistrictWeight.weight;
+  }
+
   created() {
+    this.getCustomerList();
+    this.getBillboardList();
+    this.getSubdistrictList();
     this.getCustomerBillboardList();
+  }
+
+  get paramsBillboard() {
+    return BillboardModule.paramsBillboard;
+  }
+
+  get paramsCustomer() {
+    return CustomerModule.paramsCustomer;
+  }
+
+  get paramsSubdistrict() {
+    return SubdistrictModule.paramsSubdistrict;
+  }
+
+  get customers() {
+    return CustomerModule.customers;
+  }
+
+  get billboards() {
+    return BillboardModule.billboards;
+  }
+
+  get subdistricts() {
+    return SubdistrictModule.subdistricts;
   }
 
   get params() {
@@ -112,13 +185,26 @@ export default class CustomerBillboard extends Vue {
     return CustomerBillboardModule.isLoadingFetchCustomerBillboard;
   }
 
+  getCustomerList() {
+    CustomerModule.fetchCustomer(this.paramsCustomer);
+  }
+
+  getBillboardList() {
+    BillboardModule.fetchBillboard(this.paramsBillboard);
+  }
+
+  getSubdistrictList() {
+    SubdistrictModule.fetchSubdistrict(this.paramsSubdistrict);
+  }
+
   getCustomerBillboardList() {
     CustomerBillboardModule.fetchCustomerBillboard(this.params);
   }
 
   editItem(item: any) {
-    this.editedIndex = this.customerBillboards;
-    this.editedItem = Object.assign({}, item);
+    // this.editedIndex = this.customerBillboards;
+    this.tempCustomerBillboard = Object.assign({}, item);
+    console.info('item will edit: ', this.tempCustomerBillboard);
     this.isCreateTitle = false;
     this.dialog = true;
   }
@@ -164,9 +250,9 @@ export default class CustomerBillboard extends Vue {
   }
 
   update() {
-    console.info('idnya: ', this.editedItem.id);
+    console.info('idnya: ', this.tempCustomerBillboard.id);
     const dataAccount: any = {
-      ...this.editedItem,
+      ...this.tempCustomerBillboard,
     };
     CustomerBillboardModule.updateOneCustomerBillboard(dataAccount);
     this.close();

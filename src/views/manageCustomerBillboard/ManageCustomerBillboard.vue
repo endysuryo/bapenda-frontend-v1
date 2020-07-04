@@ -3,7 +3,7 @@
     <HeaderPage />
     <v-progress-linear
       class="loading-indicator"
-      v-if="isLoadingFetchCustomer"
+      v-if="isLoadingFetchCustomerBillboard"
       color="success"
       indeterminate
       height="5"
@@ -27,27 +27,72 @@
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
-            <v-card>
-              <v-card-title>
-                <span class="headline">{{ isCreateTitle ? 'Create' : 'Edit' }} Customer Billboards</span>
-              </v-card-title>
+            <div>
+              <v-card class="mx-auto">
+                <v-card-title>
+                  <span class="headline">{{ isCreateTitle ? 'Create' : 'Edit' }} Customer Billboards</span>
+                </v-card-title>
+                <v-card-text class="text--primary">
+                  <v-text-field
+                    v-model="tempCustomerBillboard.billing_id"
+                    label="ID Billing"
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="tempCustomerBillboard.skpd_number"
+                    label="Nomor SKPD"
+                    required
+                  ></v-text-field>
+                  <v-select
+                    :items="customers"
+                    label="Customer"
+                    item-value="id"
+                    item-text="name"
+                    v-model="tempCustomerBillboard.customer_id"
+                  ></v-select>
+                  <v-select
+                    :items="tempBillboard"
+                    label="Jenis Billboard"
+                    item-value="id"
+                    item-text="name"
+                    v-model="tempCustomerBillboard.billboard_id"
+                    @change="onChangeBillboard()"
+                  ></v-select>
+                  <v-select
+                    :items="tempSubdistrict"
+                    label="Lokasi Kecamatan"
+                    item-value="id"
+                    item-text="name"
+                    v-model="tempCustomerBillboard.subdistrict_id"
+                    @change="onChangeSubdistrict()"
+                  ></v-select>
+                  <v-text-field
+                    v-model="tempCustomerBillboard.billboard_weight"
+                    label="Bobot Billboard"
+                    required
+                    readonly
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="tempCustomerBillboard.billboard_total"
+                    label="Total Billboard"
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="tempCustomerBillboard.subdistrict_weight"
+                    label="Bobot Kecamatan"
+                    required
+                    readonly
+                  ></v-text-field>
+                </v-card-text>
 
-              <v-card-text>
-                <v-container>
-                  <v-text-field v-model="editedItem.name" label="Nama"></v-text-field>
-                  <v-text-field v-model="editedItem.address" label="Alamat"></v-text-field>
-                  <v-text-field v-model="editedItem.phone" label="Telepon"></v-text-field>
-                  <v-text-field v-model="editedItem.npwp" label="NPWPD"></v-text-field>
-                </v-container>
-              </v-card-text>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                <v-btn v-if="isCreateTitle" color="blue darken-1" text @click="save">Save</v-btn>
-                <v-btn v-if="!isCreateTitle" color="blue darken-1" text @click="update">Update</v-btn>
-              </v-card-actions>
-            </v-card>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                  <v-btn v-if="isCreateTitle" color="blue darken-1" text @click="save">Save</v-btn>
+                  <v-btn v-if="!isCreateTitle" color="blue darken-1" text @click="update">Update</v-btn>
+                </v-card-actions>
+              </v-card>
+            </div>
           </v-dialog>
         </v-toolbar>
       </template>
