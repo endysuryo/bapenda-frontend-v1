@@ -17,22 +17,24 @@
 
       <!-- <v-card-subtitle class="pb-0">Login</v-card-subtitle> -->
 
-      <v-card-text class="text--primary">
-        <v-text-field v-model="username" label="Username" required></v-text-field>
-        <v-text-field
-          v-model="password"
-          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-          :type="show ? 'text' : 'password'"
-          name="input-10-1"
-          label="Password"
-          @click:append="show = !show"
-        ></v-text-field>
-      </v-card-text>
+      <form>
+        <v-card-text class="text--primary">
+          <v-text-field v-model="username" label="Username" required></v-text-field>
+          <v-text-field
+            v-model="password"
+            :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show ? 'text' : 'password'"
+            name="input-10-1"
+            label="Password"
+            @click:append="show = !show"
+          ></v-text-field>
+        </v-card-text>
 
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="red lighten-1" block dark @click="login">Login</v-btn>
-      </v-card-actions>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="red lighten-1" block dark @click="login">Login</v-btn>
+        </v-card-actions>
+      </form>
     </v-card>
   </div>
 </template>

@@ -58,7 +58,7 @@ export default class Billboard extends Vue {
       value: 'weight',
     },
     {
-      text: 'Harga',
+      text: 'Harga (Rp)',
       align: 'start',
       sortable: true,
       value: 'price',

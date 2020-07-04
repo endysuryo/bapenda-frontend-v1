@@ -32,7 +32,7 @@
                 <v-container>
                   <v-text-field v-model="editedItem.name" label="JenisReklame"></v-text-field>
                   <v-text-field v-model="editedItem.weight" label="Bobot"></v-text-field>
-                  <v-text-field v-model="editedItem.price" label="Harga"></v-text-field>
+                  <v-text-field v-model="editedItem.price" label="Harga" prefix="Rp."></v-text-field>
                 </v-container>
               </v-card-text>
 

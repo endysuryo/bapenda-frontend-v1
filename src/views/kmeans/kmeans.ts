@@ -20,48 +20,48 @@ export default class Kmeans extends Vue {
   menu2: boolean = false;
   selected: any = [];
   headers: any = [
-    {
-      text: 'Billing ID',
-      align: 'start',
-      sortable: false,
-      value: 'billing_id',
-    },
-    { text: 'SKPD', value: 'skpd_number' },
-    { text: 'Customer', value: 'customer.name' },
-    { text: 'Jenis Billboard', value: 'billboard.name' },
-    { text: 'Lokasi Kecamatan', value: 'subdistrict.name' },
+    // {
+    //   text: 'Billing ID',
+    //   align: 'start',
+    //   sortable: false,
+    //   value: 'billing_id',
+    // },
+    // { text: 'SKPD', value: 'skpd_number' },
+    // { text: 'Customer', value: 'customer.name' },
+    { text: 'Jenis Billboard', value: 'billboard_name' },
+    { text: 'Lokasi Kecamatan', value: 'subdistrict_name' },
     { text: 'Bobot Kecamatan', value: 'subdistrict_weight' },
     { text: 'Total Billboard', value: 'billboard_total' },
     { text: 'Bobot Billboard', value: 'billboard_weight' },
   ];
 
   centroid_headers: any = [
-    {
-      text: 'Billing ID',
-      align: 'start',
-      sortable: false,
-      value: 'billing_id',
-    },
-    { text: 'SKPD', value: 'skpd_number' },
-    { text: 'Customer', value: 'customer.name' },
-    { text: 'Jenis Billboard', value: 'billboard.name' },
-    { text: 'Lokasi Kecamatan', value: 'subdistrict.name' },
+    // {
+    //   text: 'Billing ID',
+    //   align: 'start',
+    //   sortable: false,
+    //   value: 'billing_id',
+    // },
+    // { text: 'SKPD', value: 'skpd_number' },
+    // { text: 'Customer', value: 'customer.name' },
+    { text: 'Jenis Billboard', value: 'billboard_name' },
+    { text: 'Lokasi Kecamatan', value: 'subdistrict_name' },
     { text: 'Bobot Kecamatan', value: 'subdistrict_weight' },
     { text: 'Total Billboard', value: 'billboard_total' },
     { text: 'Bobot Billboard', value: 'billboard_weight' },
   ];
 
   kmeans_headers: any = [
-    {
-      text: 'Billing ID',
-      align: 'start',
-      sortable: false,
-      value: 'billing_id',
-    },
-    { text: 'SKPD', value: 'skpd_number' },
-    { text: 'Customer', value: 'customer.name' },
-    { text: 'Jenis Billboard', value: 'billboard.name' },
-    { text: 'Lokasi Kecamatan', value: 'subdistrict.name' },
+    // {
+    //   text: 'Billing ID',
+    //   align: 'start',
+    //   sortable: false,
+    //   value: 'billing_id',
+    // },
+    // { text: 'SKPD', value: 'skpd_number' },
+    // { text: 'Customer', value: 'customer.name' },
+    { text: 'Jenis Billboard', value: 'billboard_name' },
+    { text: 'Lokasi Kecamatan', value: 'subdistrict_name' },
     { text: 'Bobot Kecamatan', value: 'subdistrict_weight' },
     { text: 'Total Billboard', value: 'billboard_total' },
     { text: 'Bobot Billboard', value: 'billboard_weight' },
@@ -93,6 +93,7 @@ export default class Kmeans extends Vue {
   }
 
   async checkCentroid() {
+    console.info('selected : ', this.selected);
     if (this.selected.length === 3) {
       this.centroid_dialog = true;
     } else {

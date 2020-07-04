@@ -46,6 +46,7 @@
           v-model="customerBillboard.subdistrict_weight"
           label="Bobot Kecamatan"
           required
+          readonly
         ></v-text-field>
       </v-card-text>
 
