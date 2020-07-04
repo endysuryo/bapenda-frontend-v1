@@ -6,7 +6,7 @@
       app
       dark
       color="red lighten-1"
-      width="280"
+      width="310"
       v-model="drawerAppStatus"
     >
       <v-list>

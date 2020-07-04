@@ -23,6 +23,11 @@ export default class BaseApp extends Vue {
       text: 'Customer Billboard',
       routeName: 'customer-billboard',
     },
+    {
+      icon: 'mdi-database',
+      text: 'Kelola Customer Billboard',
+      routeName: 'manage-customer-billboard',
+    },
   ];
   itemsCourse: any = [
     { icon: 'mdi-account', text: 'Customer', routeName: 'customer' },

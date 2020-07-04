@@ -1,5 +1,6 @@
 import CustomerBillboard from '@/views/customerBillboard/CustomerBillboard.vue';
 import Login from '@/views/login/Login.vue';
+import ManageCustomerBillboard from '@/views/manageCustomerBillboard/ManageCustomerBillboard.vue';
 import Vue from 'vue';
 import Router from 'vue-router';
 import Account from '../views/account/Account.vue';
@@ -73,6 +74,15 @@ export const routes: any[] = [
     component: CustomerBillboard,
     meta: {
       title: 'Customer Billboard',
+      requiredAuth: true,
+    },
+  },
+  {
+    path: '/manage-customer-billboard',
+    name: 'manage-customer-billboard',
+    component: ManageCustomerBillboard,
+    meta: {
+      title: 'Manage Customer Billboard',
       requiredAuth: true,
     },
   },

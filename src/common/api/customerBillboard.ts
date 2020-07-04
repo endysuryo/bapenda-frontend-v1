@@ -13,7 +13,7 @@ export const generateKmeans = (data: any) =>
 
 export const fetchCustomerBillboard = (queryString: string) =>
   requestCustomerBillboard({
-    url: `/customerBillboards${queryString ? '?' + queryString : ''}`,
+    url: `/customerBillboards?join=customer&join=billboard&join=subdistrict`,
     method: 'get',
   });
 
