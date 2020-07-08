@@ -95,12 +95,22 @@
       <v-dialog v-model="dialog">
         <v-card>
           <v-card-title>Hasil Perhitungan K-Means</v-card-title>
+          <v-card-subtitle class="mt-1">
+            Jumlah perulangan:
+            <b>{{ kmeans.loop_total }}</b>
+          </v-card-subtitle>
           <v-progress-linear
             indeterminate
             color="yellow darken-2"
             v-if="isLoadingFetchCustomerBillboard"
           ></v-progress-linear>
-          <v-data-table :headers="kmeans_headers" :items="kmeans" class="elevation-1"></v-data-table>
+          <v-data-table :headers="kmeans_headers" :items="kmeans.data" class="elevation-1">
+            <template v-slot:item.info="{ item }">
+              <v-chip dark v-if="item.minimum_cluster === 1" color="error">Kurang Strategis</v-chip>
+              <v-chip dark v-else-if="item.minimum_cluster === 2" color="warning">Cukup Strategis</v-chip>
+              <v-chip dark v-else-if="item.minimum_cluster === 3" color="success">Sangat Strategis</v-chip>
+            </template>
+          </v-data-table>
         </v-card>
       </v-dialog>
     </v-row>

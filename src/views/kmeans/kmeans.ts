@@ -20,14 +20,6 @@ export default class Kmeans extends Vue {
   menu2: boolean = false;
   selected: any = [];
   headers: any = [
-    // {
-    //   text: 'Billing ID',
-    //   align: 'start',
-    //   sortable: false,
-    //   value: 'billing_id',
-    // },
-    // { text: 'SKPD', value: 'skpd_number' },
-    // { text: 'Customer', value: 'customer.name' },
     { text: 'Jenis Billboard', value: 'billboard_name' },
     { text: 'Lokasi Kecamatan', value: 'subdistrict_name' },
     { text: 'Bobot Kecamatan', value: 'subdistrict_weight' },
@@ -36,14 +28,6 @@ export default class Kmeans extends Vue {
   ];
 
   centroid_headers: any = [
-    // {
-    //   text: 'Billing ID',
-    //   align: 'start',
-    //   sortable: false,
-    //   value: 'billing_id',
-    // },
-    // { text: 'SKPD', value: 'skpd_number' },
-    // { text: 'Customer', value: 'customer.name' },
     { text: 'Jenis Billboard', value: 'billboard_name' },
     { text: 'Lokasi Kecamatan', value: 'subdistrict_name' },
     { text: 'Bobot Kecamatan', value: 'subdistrict_weight' },
@@ -52,14 +36,6 @@ export default class Kmeans extends Vue {
   ];
 
   kmeans_headers: any = [
-    // {
-    //   text: 'Billing ID',
-    //   align: 'start',
-    //   sortable: false,
-    //   value: 'billing_id',
-    // },
-    // { text: 'SKPD', value: 'skpd_number' },
-    // { text: 'Customer', value: 'customer.name' },
     { text: 'Jenis Billboard', value: 'billboard_name' },
     { text: 'Lokasi Kecamatan', value: 'subdistrict_name' },
     { text: 'Bobot Kecamatan', value: 'subdistrict_weight' },
@@ -69,6 +45,7 @@ export default class Kmeans extends Vue {
     { text: 'Data Klaster 2', value: 'data_cluster2' },
     { text: 'Data Klaster 3', value: 'data_cluster3' },
     { text: 'Klaster Minimum', value: 'minimum_cluster' },
+    { text: 'Keterangan', value: 'info', sortable: false },
   ];
 
   get isLoadingFetchCustomerBillboard() {
