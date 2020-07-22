@@ -13,7 +13,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="red lighten-1" text @click="generateKmeans">Proses</v-btn>
+          <v-btn color="red lighten-1" @click="generateKmeans" dark>Proses</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

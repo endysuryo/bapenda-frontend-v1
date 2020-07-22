@@ -83,7 +83,6 @@ export default class Customer extends Vue {
   }
 
   get customers() {
-    console.info(CustomerModule.customers);
     return CustomerModule.customers;
   }
 
@@ -135,13 +134,11 @@ export default class Customer extends Vue {
     const dataAccount: any = {
       ...this.editedItem,
     };
-    console.info('itemnya : ', dataAccount);
     CustomerModule.createOneCustomer(dataAccount);
     this.close();
   }
 
   update() {
-    console.info('idnya: ', this.editedItem.id);
     const dataAccount: any = {
       ...this.editedItem,
     };

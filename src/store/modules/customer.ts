@@ -54,8 +54,6 @@ class Customer extends VuexModule implements ICustomerStore {
 
       if (res && res.data) {
         this.SET_LOADING_FETCH_CUSTOMER(false);
-        console.info('customer res.data', res.data);
-
         this.SET_CUSTOMERS(res.data);
       } else {
         this.SET_LOADING_FETCH_CUSTOMER(false);
@@ -91,7 +89,6 @@ class Customer extends VuexModule implements ICustomerStore {
   @Action
   async updateOneCustomer(data: ICustomerData) {
     try {
-      console.info('action data', data);
       this.CLEAN_ACTION();
       this.SET_LOADING_UPDATE_CUSTOMER(true);
       const res: any = await updateOneCustomer((data as any).id, data);

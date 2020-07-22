@@ -33,7 +33,6 @@ export default class CustomerBillboard extends Vue {
 
   @Watch('customerBillboard.billboard_id')
   onChangeBillboard(data: any) {
-    console.info('datanya : ', data);
     const billboardWeight = this.tempBillboard.find((el: any) => {
       return el.id === data;
     });

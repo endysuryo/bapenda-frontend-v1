@@ -54,8 +54,6 @@ class Subdistrict extends VuexModule implements ISubdistrictStore {
 
       if (res && res.data) {
         this.SET_LOADING_FETCH_SUBDISTRICT(false);
-        console.info('subdistrict res.data', res.data);
-
         this.SET_SUBDISTRICTS(res.data);
       } else {
         this.SET_LOADING_FETCH_SUBDISTRICT(false);
@@ -91,7 +89,6 @@ class Subdistrict extends VuexModule implements ISubdistrictStore {
   @Action
   async updateOneSubdistrict(data: ISubdistrictData) {
     try {
-      console.info('action data', data);
       this.CLEAN_ACTION();
       this.SET_LOADING_UPDATE_SUBDISTRICT(true);
       const res: any = await updateOneSubdistrict((data as any).id, data);

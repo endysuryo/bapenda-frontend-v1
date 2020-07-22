@@ -67,7 +67,6 @@ export default class Subdistrict extends Vue {
   }
 
   get subdistricts() {
-    console.info(SubdistrictModule.subdistricts);
     return SubdistrictModule.subdistricts;
   }
 
@@ -119,13 +118,11 @@ export default class Subdistrict extends Vue {
     const dataAccount: any = {
       ...this.editedItem,
     };
-    console.info('itemnya : ', dataAccount);
     SubdistrictModule.createOneSubdistrict(dataAccount);
     this.close();
   }
 
   update() {
-    console.info('idnya: ', this.editedItem.id);
     const dataAccount: any = {
       ...this.editedItem,
     };

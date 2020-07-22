@@ -60,6 +60,10 @@ export default class Kmeans extends Vue {
     return CustomerBillboardModule.kmeans;
   }
 
+  mounted() {
+    CustomerBillboardModule.cleanCustomerBillboard();
+  }
+
   async getCustomerBillboard() {
     const params: any = {
       start_date: this.start_date,
@@ -70,7 +74,6 @@ export default class Kmeans extends Vue {
   }
 
   async checkCentroid() {
-    console.info('selected : ', this.selected);
     if (this.selected.length === 3) {
       this.centroid_dialog = true;
     } else {
@@ -79,7 +82,6 @@ export default class Kmeans extends Vue {
   }
 
   async generateKmeans() {
-    console.info('selected: ', this.selected);
     this.centroid_dialog = false;
     if (this.selected.length === 3) {
       const payload = {
@@ -89,11 +91,8 @@ export default class Kmeans extends Vue {
         cluster_2: this.selected[1],
         cluster_3: this.selected[2],
       };
-      console.info('payload: ', payload);
       CustomerBillboardModule.generateKmeans(payload);
       this.dialog = true;
-    } else {
-      console.info('tidak mantap');
     }
   }
 }

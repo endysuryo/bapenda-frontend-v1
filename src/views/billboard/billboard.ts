@@ -75,7 +75,6 @@ export default class Billboard extends Vue {
   }
 
   get billboards() {
-    console.info(BillboardModule.billboards);
     return BillboardModule.billboards;
   }
 
@@ -127,13 +126,11 @@ export default class Billboard extends Vue {
     const dataAccount: any = {
       ...this.editedItem,
     };
-    console.info('itemnya : ', dataAccount);
     BillboardModule.createOneBillboard(dataAccount);
     this.close();
   }
 
   update() {
-    console.info('idnya: ', this.editedItem.id);
     const dataAccount: any = {
       ...this.editedItem,
     };

@@ -78,6 +78,12 @@ export default class CustomerBillboard extends Vue {
       value: 'billboard.name',
     },
     {
+      text: 'Kecamatan',
+      align: 'start',
+      sortable: true,
+      value: 'subdistrict.name',
+    },
+    {
       text: 'Bobot Kecamatan',
       align: 'start',
       sortable: true,
@@ -177,7 +183,6 @@ export default class CustomerBillboard extends Vue {
   }
 
   get customerBillboards() {
-    console.info(CustomerBillboardModule.customerBillboards);
     return CustomerBillboardModule.customerBillboards;
   }
 
@@ -204,7 +209,6 @@ export default class CustomerBillboard extends Vue {
   editItem(item: any) {
     // this.editedIndex = this.customerBillboards;
     this.tempCustomerBillboard = Object.assign({}, item);
-    console.info('item will edit: ', this.tempCustomerBillboard);
     this.isCreateTitle = false;
     this.dialog = true;
   }
@@ -244,16 +248,18 @@ export default class CustomerBillboard extends Vue {
     const dataAccount: any = {
       ...this.editedItem,
     };
-    console.info('itemnya : ', dataAccount);
     CustomerBillboardModule.createOneCustomerBillboard(dataAccount);
     this.close();
   }
 
   update() {
-    console.info('idnya: ', this.tempCustomerBillboard.id);
     const dataAccount: any = {
       ...this.tempCustomerBillboard,
     };
+    delete dataAccount.billboard;
+    delete dataAccount.customer;
+    delete dataAccount.subdistrict;
+    console.info('data akun: ', dataAccount);
     CustomerBillboardModule.updateOneCustomerBillboard(dataAccount);
     this.close();
   }

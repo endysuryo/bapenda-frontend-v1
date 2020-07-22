@@ -54,8 +54,6 @@ class Billboard extends VuexModule implements IBillboardStore {
 
       if (res && res.data) {
         this.SET_LOADING_FETCH_BILLBOARD(false);
-        console.info('billboard res.data', res.data);
-
         this.SET_BILLBOARDS(res.data);
       } else {
         this.SET_LOADING_FETCH_BILLBOARD(false);
@@ -91,7 +89,6 @@ class Billboard extends VuexModule implements IBillboardStore {
   @Action
   async updateOneBillboard(data: IBillboardData) {
     try {
-      console.info('action data', data);
       this.CLEAN_ACTION();
       this.SET_LOADING_UPDATE_BILLBOARD(true);
       const res: any = await updateOneBillboard((data as any).id, data);

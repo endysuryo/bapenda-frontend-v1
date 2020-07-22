@@ -59,7 +59,6 @@ class CustomerBillboard extends VuexModule implements ICustomerBillboardStore {
 
       if (res && res.data) {
         this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(false);
-        console.info('hasil kmeans: ', res.data);
         this.SET_KMEANS(res.data);
       } else {
         this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(false);
@@ -84,8 +83,6 @@ class CustomerBillboard extends VuexModule implements ICustomerBillboardStore {
 
       if (res && res.data) {
         this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(false);
-        console.info('customerBillboard res.data', res.data);
-
         this.SET_CUSTOMER_BILLBOARDS(res.data);
       } else {
         this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(false);
@@ -108,8 +105,6 @@ class CustomerBillboard extends VuexModule implements ICustomerBillboardStore {
 
       if (res && res.data) {
         this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(false);
-        console.info('customerBillboardByDate res.data', res.data);
-
         this.SET_CUSTOMER_BILLBOARD_BY_DATES(res.data);
       } else {
         this.SET_LOADING_FETCH_CUSTOMER_BILLBOARD(false);
@@ -147,7 +142,6 @@ class CustomerBillboard extends VuexModule implements ICustomerBillboardStore {
   @Action
   async updateOneCustomerBillboard(data: ICustomerBillboardData) {
     try {
-      console.info('action data', data);
       this.CLEAN_ACTION();
       this.SET_LOADING_UPDATE_CUSTOMER_BILLBOARD(true);
       const res: any = await updateOneCustomerBillboard((data as any).id, data);
@@ -183,6 +177,17 @@ class CustomerBillboard extends VuexModule implements ICustomerBillboardStore {
     }
   }
 
+  @Action
+  async cleanCustomerBillboard() {
+    try {
+      this.CLEAN_ACTION();
+    } catch (error) {
+      this.SET_LOADING_DELETE_CUSTOMER_BILLBOARD(false);
+      this.SET_INDICATOR_ERROR_CUSTOMER_BILLBOARD(true);
+      this.SET_ERROR_CUSTOMER_BILLBOARD(formatErrorMessage(error));
+    }
+  }
+
   @Mutation
   SET_CUSTOMER_BILLBOARDS(payload: IResult) {
     this.customerBillboards = payload;
@@ -204,6 +209,8 @@ class CustomerBillboard extends VuexModule implements ICustomerBillboardStore {
     this.isCustomerBillboardSuccess = false;
     this.customerBillboardSuccessState = initSuccessState;
     this.customerBillboardErrorState = initErrorState;
+    this.customerBillboardByDates = [];
+    this.kmeans = [];
   }
 
   @Mutation

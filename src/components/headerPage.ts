@@ -20,7 +20,6 @@ export default class HeaderPage extends Vue {
   changeDrawer(status: boolean) {
     this.drawer = status;
     AppModule.toggleDrawerApp(status);
-    console.info('data drawer: ', this.drawer);
   }
   VERSION_APP: string = process.env.VUE_APP_VERSION;
   ENV: string = process.env.NODE_ENV;

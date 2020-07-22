@@ -87,9 +87,9 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                  <v-btn v-if="isCreateTitle" color="blue darken-1" text @click="save">Save</v-btn>
-                  <v-btn v-if="!isCreateTitle" color="blue darken-1" text @click="update">Update</v-btn>
+                  <v-btn color="red lighten-1" text @click="close">Cancel</v-btn>
+                  <v-btn v-if="isCreateTitle" color="red lighten-1" text @click="save">Save</v-btn>
+                  <v-btn v-if="!isCreateTitle" color="red lighten-1" text @click="update">Update</v-btn>
                 </v-card-actions>
               </v-card>
             </div>
