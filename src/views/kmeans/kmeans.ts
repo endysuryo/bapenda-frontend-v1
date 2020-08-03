@@ -28,6 +28,7 @@ export default class Kmeans extends Vue {
   ];
 
   centroid_headers: any = [
+    { text: 'Urutan', value: 'number' },
     { text: 'Jenis Billboard', value: 'billboard_name' },
     { text: 'Lokasi Kecamatan', value: 'subdistrict_name' },
     { text: 'Bobot Kecamatan', value: 'subdistrict_weight' },

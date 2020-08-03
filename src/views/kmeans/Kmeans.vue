@@ -9,7 +9,16 @@
       <v-card>
         <v-card-title class="headline">Centroid Summary :</v-card-title>
         <v-card-text>
-          <v-data-table :headers="centroid_headers" :items="selected" class="elevation-1"></v-data-table>
+          <v-data-table :headers="centroid_headers" :items="selected" class="elevation-1">
+            <template v-slot:item.number="{ item }">
+              {{
+              selected.map(
+              function(x) {
+              return x.id;
+              }).indexOf(item.id) + 1
+              }}
+            </template>
+          </v-data-table>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
